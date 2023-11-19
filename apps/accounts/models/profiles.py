@@ -2,6 +2,12 @@ from django.db import models
 from django.conf import settings
 from base.models import BaseModel
 
+GENDER_CHOICES = [
+    ('male', 'Male'),
+    ('female', 'Female'),
+    ('other', 'Other'),
+]
+
 
 class Profile(BaseModel):
     user = models.OneToOneField(
@@ -17,6 +23,12 @@ class Profile(BaseModel):
         unique=True,
         verbose_name='Team Name'
     )
+    gender = models.CharField(
+        max_length=10,
+        choices=GENDER_CHOICES,
+        verbose_name='Gender'
+    )
+
     profile_picture = models.ImageField(
         upload_to='profile_pics/',
         blank=True,
