@@ -34,7 +34,6 @@ class Profile(BaseModel):
         blank=True,
         null=True,
         verbose_name='Profile Picture',
-
     )
 
     def __str__(self):

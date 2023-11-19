@@ -16,7 +16,7 @@ pymysql.install_as_MySQLdb()
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-d_name = config('d_name', default='ims')
+d_name = config('d_name', default='fantasy')
 d_user = config('d_user', default='root')
 d_password = config('d_password', default='notpassword')
 d_host = config('d_host', default='localhost')
