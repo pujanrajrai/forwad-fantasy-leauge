@@ -1,3 +1,44 @@
 {% extends "base.html" %}
 {% block body %}
+<a href="{% url 'accounts:pages:users:create_user' %}" class="btn btn-sm btn-primary">
+    <i class="fa fa-plus"></i>Create User</a>
+              <table class="table datatable">
+                <thead>
+                  <tr>
+                    <th>
+                      <b>N</b>ame
+                    </th>
+                    <th>Full Name</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for user in user_list %}
+                    
+                    
+                  <tr>
+                    <td>{{user.user.email}}</td>
+                    <td>{{user.fullname}}</td>
+                    <td><form>
+                        <a href="{% url 'accounts:pages:users:profile_redirect' user.id %}" class="btn btn-info btn-sm"><i
+                        class="fa fa-eye"></i> View Profile</a>
+                        {% if user.user.is_blocked %}
+            <!-- If user is blocked, show "Unblock" button -->
+            <a href="{% url 'accounts:pages:users:user_unblock_device' user.user.id %}" class="btn btn-sm btn-success">
+                <i class="fa fa-check"></i>&nbsp;Unblock
+            </a>
+        {% else %}
+            <!-- If user is not blocked, show "Block" button -->
+            <a href="{% url 'accounts:pages:users:user_block_device' user.user.id %}" class="btn btn-sm btn-danger">
+                <i class="fa fa-ban"></i>&nbsp;Block
+            </a>
+        {% endif %}
+                    </form></td>
+                    
+                  </tr>
+                  {% endfor %}
+                  
+                </tbody>
+              </table>
+
 {%endblock%}
