@@ -6,6 +6,7 @@ from django.shortcuts import redirect, render
 from .forms import ProfileForm, UserForm
 from django.contrib import messages
 from accounts.models.users import User
+from accounts.models.profiles import Profile
 
 def create(request):
     if request.method == 'POST':
@@ -31,10 +32,10 @@ from django.views.generic import ListView
 
 
 class UserListView(ListView):
-    model = User
+    model = Profile
     template_name = 'accounts/usermanagement/list.html'
     context_object_name = 'user_list'  # Specify the variable name in the template
 
     def get_queryset(self):
         # Customize the queryset if needed
-        return User.objects.all()
+        return Profile.objects.all()
