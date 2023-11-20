@@ -2,11 +2,13 @@
 #todo
 CRUD of user including password change and blocking user
 """
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render,get_object_or_404
 from .forms import ProfileForm, UserForm
 from django.contrib import messages
 from accounts.models.users import User
 from accounts.models.profiles import Profile
+from django.views import View
+from django.contrib.auth import get_user_model
 
 def create(request):
     if request.method == 'POST':
@@ -39,3 +41,34 @@ class UserListView(ListView):
     def get_queryset(self):
         # Customize the queryset if needed
         return Profile.objects.all()
+
+
+# views.py
+
+
+class BlockUserView(View):
+    def get(self, request, user_id):
+        user = get_object_or_404(User, id=user_id)
+        user.is_blocked = True
+        user.save()
+        messages.success(request, f'User {user.email} is blocked successfully.')
+        return redirect('accounts:pages:users:user_list')  # Redirect to the user list page
+
+class UnblockUserView(View):
+    def get(self, request, user_id):
+        user = get_object_or_404(User, id=user_id)
+        user.is_blocked = False
+        user.save()
+        messages.success(request, f'User {user.email} is unblocked successfully.')
+        return redirect('accounts:pages:users:user_list')  # Redirect to the user list page
+
+
+
+
+
+class UserProfileRedirectView(View):
+    template_name = 'accounts/usermanagement/user_profile.html'  # Change this to the actual template name for the user profile page
+
+    def get(self, request, user_id):
+        user_profile = get_object_or_404(Profile, id=user_id)
+        return render(request, self.template_name, {'user_profile': user_profile})
