@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from accounts.models.profiles import Profile,GENDER_CHOICES
 from accounts.models.users import User
 from django.contrib.auth.forms import PasswordChangeForm
+from django.forms.widgets import Select, ClearableFileInput
 
 class UserForm(UserCreationForm):
     class Meta:
@@ -14,7 +15,14 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['fullname', 'teamname', 'gender', 'profile_picture']
-        # Add any additional fields or customization you need
+        widgets = {
+            'fullname': forms.TextInput(attrs={'class': 'form-control', 'style': 'color:black'}),
+            'teamname': forms.TextInput(attrs={'class': 'form-control', 'style': 'color:black'}),
+            'gender': Select(attrs={'class': 'form-control', 'style': 'color: black'}),
+            'profile_picture': ClearableFileInput(attrs={'class': 'form-control-file'}),
+            
+
+        }
 
 
 
