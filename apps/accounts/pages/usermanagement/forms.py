@@ -9,6 +9,10 @@ class UserForm(UserCreationForm):
     class Meta:
         model = User
         fields = ['email', 'role']
+        widgets = {
+            'email': forms.EmailField(attrs={'class': 'form-control', 'style': 'color:black'}),
+            'role': Select(attrs={'class': 'form-control', 'style': 'color: black'}),
+        }
         # Add any additional fields or customization you need
 
 class ProfileForm(forms.ModelForm):
