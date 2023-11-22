@@ -10,6 +10,7 @@ from accounts.models.profiles import Profile
 from django.views import View
 from django.contrib.auth import get_user_model
 from django.contrib.auth import update_session_auth_hash
+from django.views.generic import ListView
 
 def create(request):
     if request.method == 'POST':
@@ -31,7 +32,6 @@ def create(request):
     return render(request, 'accounts/usermanagement/create.html', {'user_form': user_form, 'profile_form': profile_form})
 
 
-from django.views.generic import ListView
 
 
 class UserListView(ListView):
