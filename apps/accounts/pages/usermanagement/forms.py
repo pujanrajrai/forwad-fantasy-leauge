@@ -9,11 +9,25 @@ class UserForm(UserCreationForm):
     class Meta:
         model = User
         fields = ['email', 'role']
-        widgets = {
-            'email': forms.EmailField(attrs={'class': 'form-control', 'style': 'color:black'}),
-            'role': Select(attrs={'class': 'form-control', 'style': 'color: black'}),
-        }
-        # Add any additional fields or customization you need
+
+    email = forms.EmailField(
+        widget=forms.EmailInput(attrs={'class': 'form-control', 'style': 'color:black'})
+    )
+
+    role = forms.ChoiceField(
+        widget=Select(attrs={'class': 'form-control', 'style': 'color: black'}),
+        choices=[('admin', 'Admin'), ('player', 'Player')])
+    
+    password1 = forms.CharField(
+        widget=forms.PasswordInput(attrs={'class': 'form-control', 'style': 'color:black'}),
+        label='Password'
+    )
+
+    password2 = forms.CharField(
+        widget=forms.PasswordInput(attrs={'class': 'form-control', 'style': 'color:black'}),
+        label='Confirm Password'
+    )
+
 
 class ProfileForm(forms.ModelForm):
     class Meta:
