@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from accounts.models.profiles import Profile,GENDER_CHOICES
 from accounts.models.users import User
 from django.contrib.auth.forms import PasswordChangeForm
+from django.forms.widgets import Select, ClearableFileInput
 
 class UserForm(UserCreationForm):
     class Meta:
@@ -14,7 +15,14 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['fullname', 'teamname', 'gender', 'profile_picture']
-        # Add any additional fields or customization you need
+        widgets = {
+            'fullname': forms.TextInput(attrs={'class': 'form-control', 'style': 'color:black'}),
+            'teamname': forms.TextInput(attrs={'class': 'form-control', 'style': 'color:black'}),
+            'gender': Select(attrs={'class': 'form-control', 'style': 'color: black'}),
+            'profile_picture': ClearableFileInput(attrs={'class': 'form-control-file'}),
+            
+
+        }
 
 
 
@@ -23,6 +31,8 @@ class UserPasswordChangeForm(PasswordChangeForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         del self.fields['old_password']  # Remove the 'Old Password' field
+        self.fields['new_password1'].widget.attrs.update({'class': 'form-control', 'style': 'color: black'})
+        self.fields['new_password2'].widget.attrs.update({'class': 'form-control', 'style': 'color: black'})
 
     def clean(self):
         cleaned_data = super().clean()
@@ -33,3 +43,4 @@ class UserPasswordChangeForm(PasswordChangeForm):
             raise forms.ValidationError("The new passwords do not match.")
 
         return cleaned_data
+
