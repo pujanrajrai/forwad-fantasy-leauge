@@ -1,36 +1,38 @@
 {% extends "base.html" %}
 {% block body %}
-<a href="{% url 'players:team_create' %}" class="btn btn-sm btn-primary">
+<a href="{% url 'players:player_create' %}" class="btn btn-sm btn-primary">
     <i class="fa fa-plus"></i>Create Player</a>
               <table class="table datatable">
                 <thead>
                   <tr>
                     <th>
-                      Name
+                      Player Name
                     </th>
-                    <th>Description</th>
+                    <th>Team name</th>
+                    <th>Price</th>
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                    {% for team in team_list %}
+                    {% for players in player_list %}
                     
                     
                   <tr>
-                    <td>{{team.name}}</td>
-                    <td>{{team.description}}</td>
+                    <td>{{players.name}}</td>
+                    <td>{{players.team}}</td>
+                    <td>{{players.price}}</td>
                     <td><form>
-                      {% comment %} <a href="{% url 'players:team_delete' team.pk %}" class="btn btn-sm btn-primary" onclick="return confirmStatusChange()">
+                      <a href="{% url 'players:player_delete' players.pk %}" class="btn btn-sm btn-primary" onclick="return confirmStatusChange()">
                         <i
                         class="fa fa-trash"></i>
                     &nbsp; Delete</a>
                         </a>
-                       
-                      <a href="{% url 'players:team_update' team.pk %}" class="btn btn-sm btn-primary"">
+                    
+                      <a href="{% url 'players:player_update' players.pk %}" class="btn btn-sm btn-primary"">
                         <i
                         class="fa fa-trash"></i>
                     &nbsp; Update</a>
-                        </a> {% endcomment %}
+                        </a> 
                        
                     </form></td>
                     

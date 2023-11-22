@@ -9,4 +9,7 @@ urlpatterns = [
     path('<int:pk>/update/', views.TeamUpdateView.as_view(), name='team_update'),
 
     path('list/player/', views.PlayerListView.as_view(), name="players_list"),
+    path('create/player/', views.PlayerCreateView.as_view(), name='player_create'),
+    path('player/delete/<int:pk>', views.player_delete, name="player_delete"),
+    path('<int:pk>/update/player/', views.PlayerUpdateView.as_view(), name='player_update'),
 ]

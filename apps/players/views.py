@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from players.models.teams import Teams
 from players.models.players import Player
-from players.forms import TeamCreateForm
+from players.forms import TeamCreateForm,PlayerCreateForm
 from django.views.generic import ListView
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
@@ -65,4 +65,39 @@ class PlayerListView(ListView):
     def get_queryset(self):
         # Customize the queryset if needed
         return Player.objects.all()
+
+
+class PlayerCreateView(CreateView):
+    model = Player
+    form_class = PlayerCreateForm
+    template_name = 'players/player/create.html'  # Update with your actual template name
+    success_url = reverse_lazy('players:players_list')  # Update with your actual success URL
+
+    def form_valid(self, form):
+        # Optionally, you can perform additional actions when the form is valid
+        return super().form_valid(form)
+
+
+def player_delete(request, pk):
+    try:
+        player = Player.objects.get(pk=pk)
+        player.delete()
+        messages.success(request, 'player deleted successfully.')
+    except Player.DoesNotExist:
+        messages.error(request, 'player not found.')
+    except Exception as e:
+        messages.error(request, 'Error occurred while deleting the player.')
+
+    return redirect('players:players_list')
+
+
+class PlayerUpdateView(UpdateView):
+    model = Player
+    form_class = PlayerCreateForm  # Use the same form as in your CreateView
+    template_name = 'players/player/update.html'  # Update with your actual template name
+    success_url = reverse_lazy('players:players_list')  # Update with your actual success URL
+
+    def form_valid(self, form):
+        # Optionally, you can perform additional actions when the form is valid
+        return super().form_valid(form)
 
