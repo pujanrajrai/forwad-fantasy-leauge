@@ -15,4 +15,6 @@ urlpatterns = [
 
     path('list/userteam/', views.UserTeamListView.as_view(), name="userteam_list"),
     path('create/userteam/', views.UserTeamCreateView.as_view(), name='userteam_create'),
+    path('userteam/delete/<int:pk>', views.userteam_delete, name="userteam_delete"),
+    path('<int:pk>/update/userteam/', views.UserTeamUpdateView.as_view(), name='userteam_update'),
 ]

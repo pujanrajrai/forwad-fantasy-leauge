@@ -28,18 +28,18 @@
                     <td>{{userteam.player4}}</td>
                     <td>{{userteam.player5}}</td>
                     <td><form>
-                      {% comment %} <a href="{% url 'players:team_delete' team.pk %}" class="btn btn-sm btn-primary" onclick="return confirmStatusChange()">
+                      <a href="{% url 'players:userteam_delete' userteam.pk %}" class="btn btn-sm btn-primary" onclick="return confirmStatusChange()">
                         <i
                         class="fa fa-trash"></i>
                     &nbsp; Delete</a>
                         </a>
                        
-                      <a href="{% url 'players:team_update' team.pk %}" class="btn btn-sm btn-primary"">
+                      <a href="{% url 'players:userteam_update' userteam.pk %}" class="btn btn-sm btn-primary"">
                         <i
                         class="fa fa-trash"></i>
                     &nbsp; Update</a>
                         </a>
-                        {% endcomment %}
+                      
                     </form></td>
                     
                   </tr>
