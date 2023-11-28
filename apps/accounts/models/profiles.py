@@ -35,6 +35,7 @@ class Profile(BaseModel):
         null=True,
         verbose_name='Profile Picture',
     )
+    total_points = models.IntegerField(default=0)
 
     def __str__(self):
         return f"{self.user.email}'s Profile"
