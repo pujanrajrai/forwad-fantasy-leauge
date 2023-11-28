@@ -1,7 +1,23 @@
 {% extends "base.html" %}
+{% block pagetitle%}
+Teams
+{%endblock%}
+
+{%block button %}
+
+<button id="myButton" type="submit" class="btn btn-primary btn-sm">
+    <i class="bx bx-plus-medical"></i>
+    Create Team
+</button>
+
+<script type="text/javascript">
+    document.getElementById("myButton").onclick = function () {
+        location.href = "{% url 'players:team_create' %}";
+    };
+</script>
+{%endblock%}
 {% block body %}
-<a href="{% url 'players:team_create' %}" class="btn btn-sm btn-primary">
-    <i class="fa fa-plus"></i>Create Team</a>
+
               <table class="table datatable">
                 <thead>
                   <tr>
@@ -20,7 +36,7 @@
                     <td>{{team.name}}</td>
                     <td>{{team.description}}</td>
                     <td><form>
-                      <a href="{% url 'players:team_delete' team.pk %}" class="btn btn-sm btn-primary" onclick="return confirmStatusChange()">
+                      <a href="{% url 'players:team_delete' team.pk %}" class="btn btn-sm btn-danger" onclick="return confirmStatusChange()">
                         <i
                         class="fa fa-trash"></i>
                     &nbsp; Delete</a>

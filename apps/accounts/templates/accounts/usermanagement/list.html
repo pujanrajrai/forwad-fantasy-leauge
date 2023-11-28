@@ -1,7 +1,21 @@
 {% extends "base.html" %}
+{% block pagetitle%}
+Users
+{%endblock%}
+{%block button %}
+
+<button id="myButton" type="submit" class="btn btn-primary btn-sm">
+    <i class="bx bx-plus-medical"></i>
+    Add User
+</button>
+
+<script type="text/javascript">
+    document.getElementById("myButton").onclick = function () {
+        location.href = "{% url 'accounts:pages:users:create_user' %}";
+    };
+</script>
+{%endblock%}
 {% block body %}
-<a href="{% url 'accounts:pages:users:create_user' %}" class="btn btn-sm btn-primary">
-    <i class="fa fa-plus"></i>Create User</a>
               <table class="table datatable">
                 <thead>
                   <tr>
@@ -13,15 +27,12 @@
                   </tr>
                 </thead>
                 <tbody>
-                    {% for user in user_list %}
-                    
-                    
+                    {% for user in user_list %}    
                   <tr>
                     <td>{{user.user.email}}</td>
                     <td>{{user.fullname}}</td>
                     <td><form>
-                        <a href="{% url 'accounts:pages:users:profile_redirect' user.id %}" class="btn btn-info btn-sm"><i
-                        class="fa fa-eye"></i> View Profile</a>
+                        <a href="{% url 'accounts:pages:users:profile_redirect' user.id %}" class="btn btn-primary btn-sm"><i class="bi bi-eye"></i> View Profile</a>
                         {% if user.user.is_blocked %}
             <!-- If user is blocked, show "Unblock" button -->
             <a href="{% url 'accounts:pages:users:user_unblock_device' user.user.id %}" class="btn btn-sm btn-success">

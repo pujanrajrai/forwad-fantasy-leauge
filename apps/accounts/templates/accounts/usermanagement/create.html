@@ -1,4 +1,7 @@
 {% extends "base.html" %}
+{% block pagetitle%}
+Users
+{%endblock%}
 {% block body %}
     <h2>Create User</h2>
 
@@ -14,7 +17,7 @@
             <p style="color: red;">{{ error }}</p>
         {% endfor %}
         
-        <button type="submit">Create User</button>
+        <button type="submit" class="btn btn-sm btn-primary">Create User</button>
     </form>
     
 {%endblock%}

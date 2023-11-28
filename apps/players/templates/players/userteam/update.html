@@ -1,7 +1,9 @@
 {% extends "base.html" %}
+{% block pagetitle%}
+User Team
+{%endblock%}
 {% block body %}
     <h2> User Team Update Team</h2>
-
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         
@@ -14,4 +16,5 @@
         <button type="submit">Update User Team</button>
     </form>
    
+    
 {%endblock%}
