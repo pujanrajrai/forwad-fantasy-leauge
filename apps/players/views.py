@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from players.models.teams import Teams
 from players.models.players import Player
-from players.forms import TeamCreateForm,PlayerCreateForm
+from players.models.userteam import UserSelection
+from players.forms import TeamCreateForm,PlayerCreateForm,UserTeamCreateForm
 from django.views.generic import ListView
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
@@ -100,4 +101,49 @@ class PlayerUpdateView(UpdateView):
     def form_valid(self, form):
         # Optionally, you can perform additional actions when the form is valid
         return super().form_valid(form)
+
+# UserTeam views 
+class UserTeamCreateView(CreateView):
+    model = UserSelection
+    form_class = UserTeamCreateForm
+    template_name = 'players/userteam/create.html'  # Update with your actual template name
+    success_url = reverse_lazy('players:userteam_list')  # Update with your actual success URL
+
+    def form_valid(self, form):
+        # Optionally, you can perform additional actions when the form is valid
+        return super().form_valid(form)
+
+
+class UserTeamListView(ListView):
+    model = UserSelection
+    template_name = 'players/userteam/list.html'
+    context_object_name = 'userteam_list'  # Specify the variable name in the template
+
+    def get_queryset(self):
+        # Customize the queryset if needed
+        return UserSelection.objects.all()
+
+
+class UserTeamUpdateView(UpdateView):
+    model = UserSelection
+    form_class = UserTeamCreateForm  # Use the same form as in your CreateView
+    template_name = 'players/userteam/update.html'  # Update with your actual template name
+    success_url = reverse_lazy('players:userteam_list')  # Update with your actual success URL
+
+    def form_valid(self, form):
+        # Optionally, you can perform additional actions when the form is valid
+        return super().form_valid(form)
+
+
+def userteam_delete(request, pk):
+    try:
+        userteam = UserSelection.objects.get(pk=pk)
+        userteam.delete()
+        messages.success(request, 'userteam deleted successfully.')
+    except UserSelection.DoesNotExist:
+        messages.error(request, 'userteam not found.')
+    except Exception as e:
+        messages.error(request, 'Error occurred while deleting the userteam.')
+
+    return redirect('players:userteam_list')
 
