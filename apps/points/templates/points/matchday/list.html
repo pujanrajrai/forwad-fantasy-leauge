@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block body %}
+<a href="{% url 'points:matchday_create' %}" class="btn btn-sm btn-primary">
+    <i class="fa fa-plus"></i>Create MatchDay</a>
+              <table class="table datatable">
+                <thead>
+                  <tr>
+                    <th>
+                      Match Day
+                    </th>
+                    
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for matchday in matchday_list %}
+                    
+                    
+                  <tr>
+                    <td>{{matchday.name}}</td>
+                    
+                    <td><form>
+                      {% comment %} <a href="{% url 'players:player_delete' players.pk %}" class="btn btn-sm btn-primary" onclick="return confirmStatusChange()">
+                        <i
+                        class="fa fa-trash"></i>
+                    &nbsp; Delete</a>
+                        </a>
+                    {% endcomment %}
+                      <a href="{% url 'points:matchday_update' matchday.pk %}" class="btn btn-sm btn-primary"">
+                        <i
+                        class="fa fa-trash"></i>
+                    &nbsp; Update</a>
+                        </a>  
+                       
+                    </form></td>
+                    
+                  </tr>
+                  {% endfor %}
+                  
+                </tbody>
+              </table>
+              <script>
+                function confirmStatusChange() {
+                  if (confirm('Are you sure you want to Delete?.Once done cannot be reverted.')) {
+                      return true;  // Proceed with the link
+                  }
+                  return false;  // Cancel the link
+              }
+            </script>
+{%endblock%}

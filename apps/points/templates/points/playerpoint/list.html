@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block body %}
+<a href="{% url 'points:playerpoint_create' %}" class="btn btn-sm btn-primary">
+    <i class="fa fa-plus"></i>Create Player Point</a>
+              <table class="table datatable">
+                <thead>
+                  <tr>
+                    <th>
+                      Player Name
+                    </th>
+                    <th>Match Day</th>
+                    <th>MatchPlayed</th>
+                    <th>Goal</th>
+                    <th>Assist</th>
+                    <th>YelowCard</th>
+                    <th>RedCard</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for playerpoint in playerpoint_list %}
+                    
+                    
+                  <tr>
+                    <td>{{playerpoint.player}}</td>
+                    <td>{{playerpoint.matchday}}</td>
+                    <td>{{playerpoint.matchplayed}}</td>
+                    <td>{{playerpoint.goal}}</td>
+                    <td>{{playerpoint.assist}}</td>
+                    <td>{{playerpoint.yellowcard}}</td>
+                    <td>{{playerpoint.redcard}}</td>
+                    <td><form>
+                      {% comment %} <a href="{% url 'players:player_delete' players.pk %}" class="btn btn-sm btn-primary" onclick="return confirmStatusChange()">
+                        <i
+                        class="fa fa-trash"></i>
+                    &nbsp; Delete</a>
+                        </a>
+                    {% endcomment %}
+                      <a href="{% url 'points:playerpoint_update' playerpoint.pk %}" class="btn btn-sm btn-primary"">
+                        <i
+                        class="fa fa-trash"></i>
+                    &nbsp; Update</a>
+                        </a>  
+                       
+                    </form></td>
+                    
+                  </tr>
+                  {% endfor %}
+                  
+                </tbody>
+              </table>
+              <script>
+                function confirmStatusChange() {
+                  if (confirm('Are you sure you want to Delete?.Once done cannot be reverted.')) {
+                      return true;  // Proceed with the link
+                  }
+                  return false;  // Cancel the link
+              }
+            </script>
+{%endblock%}
