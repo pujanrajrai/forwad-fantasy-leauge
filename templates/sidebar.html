@@ -45,7 +45,13 @@
           <span>Team Result</span>
         </a>
       </li><!-- End Dashboard Nav -->
-
+      <li class="nav-item">
+        <a class="nav-link"  onclick="return confirm('Are you sure you want to Logout ?')" href="{% url 'accounts:logout'%}">
+          <i class="bi bi-people"></i>
+          <span>Logout</span>
+        </a>
+      </li><!-- End Dashboard Nav -->
+    
       
     </ul>
 

@@ -1,20 +1,15 @@
-{% extends "base.html" %}
+{% extends "base_nosidebar.html" %}
 {% block pagetitle%}
-Players
+User Team
 {%endblock%}
 {% block body %}
-    <h2>Update Players</h2>
-
+    <h2> User Team Update Team</h2>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        
         {{ form.as_p }}
         {% for error in user_form.non_field_errors %}
             <p style="color: red;">{{ error }}</p>
         {% endfor %}
-        
-        
-        <button type="submit" class="btn btn-sm btn-primary">Update Players</button>
+        <button type="submit" class="btn btn-sm btn-primary">Update User Team</button>
     </form>
-   
 {%endblock%}

@@ -1,59 +1,61 @@
-{% extends "base.html" %}
-
+{% extends "base_nosidebar.html" %}
+{% block pagetitle%}
+User Team
+{%endblock%}
+{% comment %} 
 {%block button %}
 
 <button id="myButton" type="submit" class="btn btn-primary btn-sm">
     <i class="bx bx-plus-medical"></i>
-    Create Team Result
+    Create User Team
 </button>
 
 <script type="text/javascript">
     document.getElementById("myButton").onclick = function () {
-        location.href = "{% url 'points:teamresult_create' %}";
+        location.href = "{% url 'players:userteam_create' %}";
     };
 </script>
-{%endblock%}
+{%endblock%} {% endcomment %}
 {% block body %}
+
               <table class="table datatable">
                 <thead>
                   <tr>
                     <th>
-                      Match Day
+                      Name
                     </th>
-                    <th>Team A</th>
-                    <th>Team A score</th>
-                    <th>Team B score</th>
-                    <th>Team B</th>
-                    <th>Description</th>
-                    
+                    <th>Player 1</th>
+                    <th>Player 2</th>
+                    <th>Player 3</th>
+                    <th>Player 4</th>
+                    <th>Player 5</th>
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                    {% for teamresult in teamresult_list %}
+                    {% for userteam in userteam_list %}
                     
                     
                   <tr>
-                    <td>{{teamresult.matchday}}</td>
-                    <td>{{teamresult.team_a}}</td>
-                    <td>{{teamresult.team_a_score}}</td>
-                    <td>{{teamresult.team_b_score}}</td>
-                    <td>{{teamresult.team_b}}</td>
-                    <td>{{teamresult.desc}}</td>
-                    
+                    <td>{{userteam.user}}</td>
+                    <td>{{userteam.player1}}</td>
+                    <td>{{userteam.player2}}</td>
+                    <td>{{userteam.player3}}</td>
+                    <td>{{userteam.player4}}</td>
+                    <td>{{userteam.player5}}</td>
                     <td><form>
-                      {% comment %} <a href="{% url 'players:player_delete' players.pk %}" class="btn btn-sm btn-primary" onclick="return confirmStatusChange()">
+                      {% comment %} <a href="{% url 'players:userteam_delete' userteam.pk %}" class="btn btn-sm btn-danger" onclick="return confirmStatusChange()">
                         <i
                         class="fa fa-trash"></i>
                     &nbsp; Delete</a>
-                        </a>
-                    {% endcomment %}
-                      <a href="{% url 'points:teamresult_update' teamresult.pk %}" class="btn btn-sm btn-primary"">
+                        </a> {% endcomment %}
+                       
+                      <a href="{% url 'users:update' userteam.pk %}" class="btn btn-sm btn-primary"">
                         <i
                         class="fa fa-trash"></i>
                     &nbsp; Update</a>
-                        </a>  
-                       
+                        </a>
+                      
                     </form></td>
                     
                   </tr>
