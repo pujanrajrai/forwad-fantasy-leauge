@@ -23,7 +23,8 @@ INSTALLED_APPS = [
 DJANGO_APP = [
     'accounts',
     'players',
-    'points'
+    'points',
+    'users'
 ]
 
 THIRD_PARTY_APP = [
