@@ -19,6 +19,9 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 
 
+User = get_user_model()
+
+
 @login_required()
 @has_roles(['admin'])
 def create(request):
@@ -61,10 +64,15 @@ class UserListView(ListView):
 class BlockUserView(View):
     def get(self, request, user_id):
         user = get_object_or_404(User, id=user_id)
-        user.is_blocked = True
-        user.save()
-        messages.success(
-            request, f'User {user.email} is blocked successfully.')
+
+        # Check if the user is trying to block themselves
+        if user == request.user:
+            messages.error(request, "You cannot block yourself.")
+        else:
+            user.is_blocked = True
+            user.save()
+            messages.success(request, f'User {user.email} is blocked successfully.')
+
         # Redirect to the user list page
         return redirect('accounts:pages:users:user_list')
 
