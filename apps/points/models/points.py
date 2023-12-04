@@ -34,7 +34,7 @@ class PlayerPoints(BaseModel):
     def __str__(self):
         return self.player.name
 
-    # formula hallna baki xa update ko kam pani garna baki xa
+ 
 
 
 @receiver(post_save, sender=PlayerPoints)
@@ -47,12 +47,13 @@ def update_user_profiles(sender, instance, **kwargs):
         Q(player4=instance.player) |
         Q(player5=instance.player)
     )
+    
     # Update user profiles with the calculated points
     for user_selection in user_selections:
         user = user_selection.user
         try:
             profile = Profile.objects.get(user=user)
-            profile.total_points = instance.calculate_total_points()
+            profile.total_points += instance.calculate_total_points()
             profile.save()
         except Exception as e:
             print(e)

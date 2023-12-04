@@ -33,7 +33,7 @@ User Team
                   </tr>
                 </thead>
                 <tbody>
-                    {% comment %} {% for userteam in userteam_list %}
+                     {% for userteam in userteam_list %}
                     
                     
                   <tr>
@@ -44,12 +44,13 @@ User Team
                     <td>{{userteam.player4}}</td>
                     <td>{{userteam.player5}}</td>
                     <td><form>
+                      {% comment %}
                       <a href="{% url 'players:userteam_delete' userteam.pk %}" class="btn btn-sm btn-danger" onclick="return confirmStatusChange()">
                         <i
                         class="fa fa-trash"></i>
                     &nbsp; Delete</a>
                         </a>
-                       
+                       {% endcomment %}
                       <a href="{% url 'players:userteam_update' userteam.pk %}" class="btn btn-sm btn-primary"">
                         <i
                         class="fa fa-trash"></i>
@@ -59,7 +60,7 @@ User Team
                     </form></td>
                     
                   </tr>
-                  {% endfor %} {% endcomment %}
+                  {% endfor %} 
                   
                 </tbody>
               </table>
