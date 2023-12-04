@@ -1,0 +1,70 @@
+{% extends 'home_base.html' %}
+{% load static %}
+{% block pagetitle %}
+About
+{% endblock %}
+
+{% block button %}
+<li class="nav-item dropdown">
+    <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+        <button class="btn btn-sm" style="background-color:#4153F1; color:white;"><i class="bx bx-home"></i> Home</button>
+    </a><!-- End Notification Icon -->
+</li>
+<li class="nav-item dropdown">
+    <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+        <button class="btn btn-sm" style="background-color:#4153F1; color:white;">About Us</button>
+    </a><!-- End Notification Icon -->
+</li>
+<li class="nav-item dropdown">
+    <a class="nav-link nav-icon" href="{% url 'accounts:login' %}" data-bs-toggle="dropdown">
+        <button class="btn btn-sm" id="myButton" style="background-color:#4153F1; color:white;"><i class="bx bx-lock"></i> Login</button>
+        <script type="text/javascript">
+            document.getElementById("myButton").onclick = function () {
+                location.href = "{% url 'accounts:login' %}";
+            };
+        </script>
+    </a><!-- End Notification Icon -->
+</li>
+{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h1 class="text-center mt-4 mb-4">About Us</h1>
+            <h2 class="text-center mb-4">Welcome to Fantasy Forward League!</h2>
+            <p class="lead">
+                <strong>How it Works</strong><br>
+                Our Fantasy Premier League allows you to experience the thrill of managing your own football team. Select five players wisely, and watch as they accumulate points based on their real-life performances during Premier League matches.
+            </p>
+            <p class="lead">
+                <strong>Scoring System</strong><br>
+                Players earn points for various actions on the field:
+            </p>
+            <ul>
+                <li>Match Played: +1 point</li>
+                <li>Goal: +3 points</li>
+                <li>Assist: +2 points</li>
+                <li>Yellow Card: -1 point</li>
+                <li>Red Card: -3 points</li>
+            </ul>
+            <p class="lead">
+                <strong>The Quest for Glory</strong><br>
+                The ultimate goal is to assemble a team that earns the highest total points. Will your strategic choices lead your team to victory? Keep an eye on the performance of your selected players and make strategic transfers to stay ahead of the competition.
+            </p>
+            <p class="lead">
+                <strong>How to Win</strong><br>
+                At the end of each matchday, the team with the highest cumulative points takes the crown. Compete with friends, colleagues, or football enthusiasts from around the world to see who has the best managerial skills.
+            </p>
+            <p class="lead">
+                <strong>Get Started</strong><br>
+                Create your team, make smart decisions, and enjoy the excitement of our Fantasy Forward League!
+            </p>
+        </div>
+    </div>
+</div>
+
+<footer class="text-light text-center py-3" style="background-color:#4153F1;">
+    <p>&copy; 2023 Your Website. All rights reserved.</p>
+</footer>
+{% endblock %}

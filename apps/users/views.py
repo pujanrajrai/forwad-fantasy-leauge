@@ -126,3 +126,6 @@ def home(request):
     leaders = Profile.objects.all().order_by('-total_points')
     context = {"leaders": leaders}
     return render(request, 'home/home.html', context)
+
+def about(request):
+    return render(request, 'home/about.html')

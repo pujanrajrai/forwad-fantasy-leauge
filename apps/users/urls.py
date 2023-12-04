@@ -8,5 +8,6 @@ urlpatterns = [
     path('create/', views.UserTeamCreateView.as_view(), name='create'),
     path('list/', views.get_userteam, name='list'),
     path('update/<int:pk>/', views.UserTeamUpdateView.as_view(), name='update'),
-    path('', views.home)
+    path('', views.home,name='home'),
+    path('about/', views.about,name='about')
 ]
