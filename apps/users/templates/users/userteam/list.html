@@ -1,22 +1,10 @@
-{% extends "base_nosidebar.html" %}
+{% extends "home_base.html" %}
 {% block pagetitle%}
 User Team
 {%endblock%}
-{% comment %} 
-{%block button %}
 
-<button id="myButton" type="submit" class="btn btn-primary btn-sm">
-    <i class="bx bx-plus-medical"></i>
-    Create User Team
-</button>
-
-<script type="text/javascript">
-    document.getElementById("myButton").onclick = function () {
-        location.href = "{% url 'players:userteam_create' %}";
-    };
-</script>
-{%endblock%} {% endcomment %}
 {% block body %}
+<main id="" class="" style="margin-top:100px;">
 
               <table class="table datatable">
                 <thead>
@@ -33,7 +21,6 @@ User Team
                   </tr>
                 </thead>
                 <tbody>
-                    {% for userteam in userteam_list %}
                     
                     
                   <tr>
@@ -44,23 +31,15 @@ User Team
                     <td>{{userteam.player4}}</td>
                     <td>{{userteam.player5}}</td>
                     <td><form>
-                      {% comment %} <a href="{% url 'players:userteam_delete' userteam.pk %}" class="btn btn-sm btn-danger" onclick="return confirmStatusChange()">
-                        <i
-                        class="fa fa-trash"></i>
-                    &nbsp; Delete</a>
-                        </a> {% endcomment %}
+                      
                        
                       <a href="{% url 'users:update' userteam.pk %}" class="btn btn-sm btn-primary"">
                         <i
                         class="fa fa-trash"></i>
                     &nbsp; Update</a>
                         </a>
-                      
                     </form></td>
-                    
-                  </tr>
-                  {% endfor %}
-                  
+                  </tr>                  
                 </tbody>
               </table>
               <script>
@@ -71,4 +50,5 @@ User Team
                   return false;  // Cancel the link
               }
             </script>
+          </div>
 {%endblock%}

@@ -53,9 +53,13 @@
 
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
+    <div class="d-flex align-items-center justify-content-between">
+      <a href="index.html" class="logo d-flex align-items-center">
+        <img src="{% static 'dashboard/img/logo.png' %}" alt="">
+        <span class="d-none d-lg-block">FFL</span>
+      </a>
+    </div><!-- End Logo -->
 
-      {% block pagetitle%}
-      {%endblock%}
     <nav class="header-nav ms-auto">
         <ul class="d-flex align-items-center">
   
@@ -65,14 +69,71 @@
             </a>
           </li><!-- End Search Icon-->
   
-          <li class="nav-item dropdown">
   
-            <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+            {% comment %} <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown"> {% endcomment %}
                 {% comment %} <button class="btn btn-danger btn-sm"><i class="bx   bx-plus-medical "></i> Button</button> {% endcomment %}
-                {%block button %}{%endblock%}
-            </a><!-- End Notification Icon -->
+                <li class="nav-item dropdown">
+
+                  <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+                      <button class="btn btn-sm" id="home" style="background-color:#4153F1; color:white;"><i class="bx   bx-home "></i> Home</button>
+                      <script type="text/javascript">
+                        document.getElementById("home").onclick = function () {
+                           location.href = "/";
+                        };
+                    </script>
+                   </a><!-- End Notification Icon -->
+                  </li>
+                  <li class="nav-item dropdown">
+                      <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+                         <button class="btn btn-sm"  style="background-color:#4153F1; color:white;">About Us</button>
+                      </a><!-- End Notification Icon -->
+                     </li>
+                     
+
+                     {% if not user.is_authenticated %}
+                     <li class="nav-item dropdown">
+                   <a class="nav-link nav-icon" href="{% url 'accounts:login' %}" data-bs-toggle="dropdown">
+                      <button class="btn btn-sm" id="login" style="background-color:#4153F1; color:white;"><i class="bx   bx-lock "></i> Login</button>
+                      <script type="text/javascript">
+                          document.getElementById("login").onclick = function () {
+                              location.href = "{% url 'accounts:login' %}";
+                          };
+                      </script>
+                   </a><!-- End Notification Icon -->
+                  </li>
+                  {%else %}
+                  <li class="nav-item dropdown">
+                    <a class="nav-link nav-icon" href="{% url 'users:list' %}" data-bs-toggle="dropdown">
+                       <button class="btn btn-sm" id="team" style="background-color:#4153F1; color:white;"><i class="bx   bx-lock "></i> Team</button>
+                       <script type="text/javascript">
+                           document.getElementById("team").onclick = function () {
+                               location.href = "{% url 'users:list' %}";
+                           };
+                       </script>
+                    </a><!-- End Notification Icon -->
+                   </li>
+                   <li class="nav-item dropdown">
+                    <a class="nav-link nav-icon" href="{% url 'users:profile_redirect' %}" data-bs-toggle="dropdown">
+                       <button class="btn btn-sm" id="profile" style="background-color:#4153F1; color:white;"><i class="bx   bx-lock "></i> Profile</button>
+                       <script type="text/javascript">
+                           document.getElementById("profile").onclick = function () {
+                               location.href = "{% url 'users:profile_redirect' %}";
+                           };
+                       </script>
+                    </a><!-- End Notification Icon -->
+                   </li>
+                   <li class="nav-item dropdown">
+                    <a class="nav-link nav-icon" href="{% url 'users:profile_redirect' %}" data-bs-toggle="dropdown">
+                       <button class="btn btn-sm" id="logout" style="background-color:#4153F1; color:white;"><i class="bx   bx-lock "></i> Logout</button>
+                       <script type="text/javascript">
+                           document.getElementById("logout").onclick = function () {
+                               location.href = "{% url 'accounts:logout' %}";
+                           };
+                       </script>
+                    </a><!-- End Notification Icon -->
+                   </li>
+                  {%endif%}            {% comment %} </a><!-- End Notification Icon --> {% endcomment %}
   
-          </li><!-- End Notification Nav -->
   
   
         </ul>
@@ -82,7 +143,12 @@
   </header><!-- End Header -->
  
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <main id="" class="main mt-5">
 
+              {% block body %}
+              {% endblock %}
+        
+      </main><!-- End #main -->
   <!-- Vendor JS Files -->
   <script src="{% static 'dashboard/vendor/apexcharts/apexcharts.min.js' %}"></script>
   <script src="{% static 'dashboard/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>

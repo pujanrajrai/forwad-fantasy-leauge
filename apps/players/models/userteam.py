@@ -4,7 +4,7 @@ from .players import Player
 
 
 class UserSelection(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     player1 = models.ForeignKey(
         Player, related_name='player1', on_delete=models.CASCADE)
     player2 = models.ForeignKey(

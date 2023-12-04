@@ -1,15 +1,24 @@
-{% extends "base_nosidebar.html" %}
+{% extends "home_base.html" %}
 {% block pagetitle%}
-User Team
+User Team Update
 {%endblock%}
 {% block body %}
-    <h2> User Team Update Team</h2>
-    <form method="post" enctype="multipart/form-data">
+<main id="" class="" style="margin-top:100px;">
+    <div class="card">
+        <div class="card-body m-5">
+
+            <h2> User Team Update Team</h2>
+            <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
+        
         {{ form.as_p }}
         {% for error in user_form.non_field_errors %}
             <p style="color: red;">{{ error }}</p>
         {% endfor %}
+        
         <button type="submit" class="btn btn-sm btn-primary">Update User Team</button>
     </form>
+</div>
+</div>
+</main>
 {%endblock%}

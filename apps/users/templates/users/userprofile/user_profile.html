@@ -1,12 +1,50 @@
-{% extends "base_nosidebar.html" %}
+{% extends "home_base.html" %}
 {% block pagetitle%}
 Users
 {%endblock%}
+
+{%block button%}
+<li class="nav-item dropdown">
+
+<a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+    <button class="btn btn-sm" style="background-color:#4153F1; color:white;"><i class="bx   bx-home "></i> Home</button>
+ </a><!-- End Notification Icon -->
+</li>
+<li class="nav-item dropdown">
+    <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+       <button class="btn btn-sm" style="background-color:#4153F1; color:white;">About Us</button>
+    </a><!-- End Notification Icon -->
+   </li>
+   {% if not user.is_authenticated %}
+   <li class="nav-item dropdown">
+ <a class="nav-link nav-icon" href="{% url 'accounts:login' %}" data-bs-toggle="dropdown">
+    <button class="btn btn-sm" id="login" style="background-color:#4153F1; color:white;"><i class="bx   bx-lock "></i> Login</button>
+    <script type="text/javascript">
+        document.getElementById("login").onclick = function () {
+            location.href = "{% url 'accounts:login' %}";
+        };
+    </script>
+ </a><!-- End Notification Icon -->
+</li>
+{%else %}
+
+<li class="nav-item dropdown">
+  <a class="nav-link nav-icon" href="{% url 'users:list' %}" data-bs-toggle="dropdown">
+     <button class="btn btn-sm" id="team" style="background-color:#4153F1; color:white;"><i class="bx   bx-lock "></i> Team</button>
+     <script type="text/javascript">
+         document.getElementById("team").onclick = function () {
+             location.href = "{% url 'users:list' %}";
+         };
+     </script>
+  </a><!-- End Notification Icon -->
+ </li>
+{%endif%}
+  {%endblock%}
 {% block body %}
+<main id="" class="" style="margin-top:100px;">
     <section class="section profile">
       <div class="row">
         <div class="col-xl-4">
-
           <div class="card">
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
               {% if user_profile.profile_picture %}
@@ -21,7 +59,6 @@ Users
         </div>
 
         <div class="col-xl-8">
-
           <div class="card">
             <div class="card-body pt-3">
               <!-- Bordered Tabs -->
@@ -100,5 +137,5 @@ Users
       </div>
     </section>
 
-
+  </main>
 {% endblock %}

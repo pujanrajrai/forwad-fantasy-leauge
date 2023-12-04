@@ -1,1 +1,64 @@
 {%extends 'home_base.html'%}
+{%load static%}
+{% block pagetitle%}
+Fantasy Forward Leauge
+{%endblock%}
+
+{%block button%}
+<li class="nav-item dropdown">
+
+<a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+    <button class="btn btn-sm" style="background-color:#4153F1; color:white;"><i class="bx   bx-home "></i> Home</button>
+ </a><!-- End Notification Icon -->
+</li>
+<li class="nav-item dropdown">
+    <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+       <button class="btn btn-sm" style="background-color:#4153F1; color:white;">About Us</button>
+    </a><!-- End Notification Icon -->
+   </li>
+<li class="nav-item dropdown">
+ <a class="nav-link nav-icon" href="{% url 'accounts:login' %}" data-bs-toggle="dropdown">
+    <button class="btn btn-sm" id="myButton" style="background-color:#4153F1; color:white;"><i class="bx   bx-lock "></i> Login</button>
+    <script type="text/javascript">
+        document.getElementById("myButton").onclick = function () {
+            location.href = "{% url 'accounts:login' %}";
+        };
+    </script>
+ </a><!-- End Notification Icon -->
+</li>
+  {%endblock%}
+
+  {%block body%}
+<img src="{% static 'dashboard/img/wallpaper.png' %}">
+
+<div class="card mt-5">
+    <div class="card-body mt-3">
+<h1>Leader Board</h1>
+<table class="table datatable mt-5">
+    <thead>
+      <tr>
+        <th>
+            Rank
+        </th>
+        <th>
+            Team Name
+        </th>
+        <th>Points</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for leader in leaders%}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{leader.teamname}}</td>
+            <td>{{leader.total_points}}</td>
+        </tr>
+        {%endfor%}
+    </tbody>
+  </table>
+</div>
+</div>
+<footer class="text-light text-center py-3" style="background-color:#4153F1;">
+    <p>&copy; 2023 Your Website. All rights reserved.</p>
+  </footer>
+  {%endblock%}

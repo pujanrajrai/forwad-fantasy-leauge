@@ -121,7 +121,7 @@ REST_FRAMEWORK = {
     ],
 }
 
-LOGIN_URL = '/'
+LOGIN_URL = 'accounts:login'
 
 # captcha settings
 CAPTCHA_FONT_SIZE = 55
