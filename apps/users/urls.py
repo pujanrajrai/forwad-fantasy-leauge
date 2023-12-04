@@ -8,4 +8,5 @@ urlpatterns = [
     path('list/', views.UserTeamListView.as_view(), name='list'),
     path('update/<int:pk>/', views.UserTeamUpdateView.as_view(), name='update'),
 
+    path('', views.home)
 ]

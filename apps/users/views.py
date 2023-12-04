@@ -87,3 +87,7 @@ class UserTeamUpdateView(UpdateView):
         kwargs = super().get_form_kwargs()
         kwargs['user'] = self.request.user
         return kwargs
+
+
+def home(request):
+    return render(request, 'home/home.html')

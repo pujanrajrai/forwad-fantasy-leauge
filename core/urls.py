@@ -10,6 +10,7 @@ urlpatterns = [
     path('players/', include('players.urls')),
     path('points/', include('points.urls')),
     path('users/', include('users.urls')),
+    path('', include('users.urls')),
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
