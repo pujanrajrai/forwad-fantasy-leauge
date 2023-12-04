@@ -16,28 +16,20 @@ pymysql.install_as_MySQLdb()
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-d_name = config('d_name', default='fantasy')
-d_user = config('d_user', default='root')
-d_password = config('d_password', default='notpassword')
-d_host = config('d_host', default='localhost')
-d_port = config('d_port', default='')
+# d_name = config('d_name', default='fantasy')
+# d_user = config('d_user', default='root')
+# d_password = config('d_password', default='notpassword')
+# d_host = config('d_host', default='localhost')
+# d_port = config('d_port', default='')
 
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': d_name,  # change this
-        'USER': d_user,  # change this
-        'PASSWORD': d_password,  # change this
-        'HOST': d_host,
-        'PORT': d_port,
-        'CHARSET': 'utf8',
-        'COLLATION': 'utf8_general_ci',
-        'OPTIONS': {
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
-        },
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / "db.sqlite3",  # Adjust the path as needed
     }
 }
+
 
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'

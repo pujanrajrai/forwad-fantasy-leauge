@@ -17,8 +17,16 @@ from . forms import UserTeamCreateForm
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import UpdateView
+from decorators import has_roles
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
 
 
+
+
+
+@method_decorator(login_required(), name='dispatch')
+@method_decorator(has_roles(['player']), name='dispatch')
 # Create your views here.
 class UserProfileRedirectView(View):
     # Change this to the actual template name for the user profile page
@@ -55,6 +63,10 @@ class UserProfileRedirectView(View):
         return redirect('accounts:pages:users:profile_redirect', user_id=user_id)
 
 
+
+
+@method_decorator(login_required(), name='dispatch')
+@method_decorator(has_roles(['player']), name='dispatch')
 class UserTeamCreateView(CreateView):
     model = UserSelection
     form_class = UserTeamCreateForm
@@ -71,6 +83,10 @@ class UserTeamCreateView(CreateView):
         return kwargs
 
 
+
+
+@login_required()
+@has_roles(['player'])
 def get_userteam(request):
     try:
         user_selection = UserSelection.objects.get(user=request.user)
@@ -84,6 +100,10 @@ def get_userteam(request):
     return render(request, 'users/userteam/list.html', context)
 
 
+
+
+@method_decorator(login_required(), name='dispatch')
+@method_decorator(has_roles(['player']), name='dispatch')
 class UserTeamUpdateView(UpdateView):
     model = UserSelection
     form_class = UserTeamCreateForm  # Use the same form as in your CreateView

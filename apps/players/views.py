@@ -9,9 +9,14 @@ from django.urls import reverse_lazy
 from django.contrib import messages
 from django.shortcuts import redirect
 from django.views.generic.edit import UpdateView
+from decorators import has_roles
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 
+@method_decorator(login_required(), name='dispatch')
+@method_decorator(has_roles(['admin']), name='dispatch')
 class TeamListView(ListView):
     model = Teams
     template_name = 'players/teams/list.html'
@@ -21,7 +26,8 @@ class TeamListView(ListView):
         # Customize the queryset if needed
         return Teams.objects.all()
 
-
+@method_decorator(login_required(), name='dispatch')
+@method_decorator(has_roles(['admin']), name='dispatch')
 class TeamCreateView(CreateView):
     model = Teams
     form_class = TeamCreateForm
@@ -35,6 +41,9 @@ class TeamCreateView(CreateView):
         return super().form_valid(form)
 
 
+
+@login_required()
+@has_roles(['admin'])
 def team_delete(request, pk):
     try:
         teams = Teams.objects.get(pk=pk)
@@ -47,7 +56,8 @@ def team_delete(request, pk):
 
     return redirect('players:team_list')
 
-
+@method_decorator(login_required(), name='dispatch')
+@method_decorator(has_roles(['admin']), name='dispatch')
 class TeamUpdateView(UpdateView):
     model = Teams
     form_class = TeamCreateForm  # Use the same form as in your CreateView
@@ -61,6 +71,9 @@ class TeamUpdateView(UpdateView):
         return super().form_valid(form)
 
 
+
+@method_decorator(login_required(), name='dispatch')
+@method_decorator(has_roles(['admin']), name='dispatch')
 # Players Views
 class PlayerListView(ListView):
     model = Player
@@ -72,6 +85,8 @@ class PlayerListView(ListView):
         return Player.objects.all()
 
 
+@method_decorator(login_required(), name='dispatch')
+@method_decorator(has_roles(['admin']), name='dispatch')
 class PlayerCreateView(CreateView):
     model = Player
     form_class = PlayerCreateForm
@@ -85,6 +100,9 @@ class PlayerCreateView(CreateView):
         return super().form_valid(form)
 
 
+
+@login_required()
+@has_roles(['admin'])
 def player_delete(request, pk):
     try:
         player = Player.objects.get(pk=pk)
@@ -98,6 +116,8 @@ def player_delete(request, pk):
     return redirect('players:players_list')
 
 
+@method_decorator(login_required(), name='dispatch')
+@method_decorator(has_roles(['admin']), name='dispatch')
 class PlayerUpdateView(UpdateView):
     model = Player
     form_class = PlayerCreateForm  # Use the same form as in your CreateView
@@ -113,6 +133,9 @@ class PlayerUpdateView(UpdateView):
 # UserTeam views
 
 
+
+@method_decorator(login_required(), name='dispatch')
+@method_decorator(has_roles(['admin']), name='dispatch')
 class UserTeamCreateView(CreateView):
     model = UserSelection
     form_class = UserTeamCreateForm
@@ -126,6 +149,9 @@ class UserTeamCreateView(CreateView):
         return super().form_valid(form)
 
 
+
+@method_decorator(login_required(), name='dispatch')
+@method_decorator(has_roles(['admin']), name='dispatch')
 class UserTeamListView(ListView):
     model = UserSelection
     template_name = 'players/userteam/list.html'
@@ -137,6 +163,9 @@ class UserTeamListView(ListView):
         return UserSelection.objects.all()
 
 
+
+@method_decorator(login_required(), name='dispatch')
+@method_decorator(has_roles(['admin']), name='dispatch')
 class UserTeamUpdateView(UpdateView):
     model = UserSelection
     form_class = UserTeamCreateForm  # Use the same form as in your CreateView
@@ -150,6 +179,9 @@ class UserTeamUpdateView(UpdateView):
         return super().form_valid(form)
 
 
+
+@login_required()
+@has_roles(['admin'])
 def userteam_delete(request, pk):
     try:
         userteam = UserSelection.objects.get(pk=pk)

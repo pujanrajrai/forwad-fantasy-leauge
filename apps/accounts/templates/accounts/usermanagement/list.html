@@ -20,9 +20,10 @@ Users
                 <thead>
                   <tr>
                     <th>
-                      Name
+                      Email
                     </th>
                     <th>Full Name</th>
+                    <th>Role</th>
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -31,6 +32,7 @@ Users
                   <tr>
                     <td>{{user.user.email}}</td>
                     <td>{{user.fullname}}</td>
+                    <td>{{user.user.role}}</td>
                     <td><form>
                         <a href="{% url 'accounts:pages:users:profile_redirect' user.id %}" class="btn btn-primary btn-sm"><i class="bi bi-eye"></i> View Profile</a>
                         {% if user.user.is_blocked %}

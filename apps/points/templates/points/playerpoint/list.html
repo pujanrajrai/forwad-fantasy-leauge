@@ -25,7 +25,7 @@
                     <th>Assist</th>
                     <th>YelowCard</th>
                     <th>RedCard</th>
-                    <th>Action</th>
+                   
                   </tr>
                 </thead>
                 <tbody>
@@ -40,20 +40,9 @@
                     <td>{{playerpoint.assist}}</td>
                     <td>{{playerpoint.yellowcard}}</td>
                     <td>{{playerpoint.redcard}}</td>
-                    <td><form>
-                      {% comment %} <a href="{% url 'players:player_delete' players.pk %}" class="btn btn-sm btn-primary" onclick="return confirmStatusChange()">
-                        <i
-                        class="fa fa-trash"></i>
-                    &nbsp; Delete</a>
-                        </a>
-                    {% endcomment %}
-                      <a href="{% url 'points:playerpoint_update' playerpoint.pk %}" class="btn btn-sm btn-primary"">
-                        <i
-                        class="fa fa-trash"></i>
-                    &nbsp; Update</a>
-                        </a>  
+                    
                        
-                    </form></td>
+                    </form>
                     
                   </tr>
                   {% endfor %}
