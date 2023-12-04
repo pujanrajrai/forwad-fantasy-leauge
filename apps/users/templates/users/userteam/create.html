@@ -1,9 +1,9 @@
-{% extends "base.html" %}
+{% extends "base_nosidebar.html" %}
 {% block pagetitle%}
-Players
+User Team
 {%endblock%}
 {% block body %}
-    <h2>Update Players</h2>
+    <h2>Create User Team</h2>
 
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
@@ -14,7 +14,7 @@ Players
         {% endfor %}
         
         
-        <button type="submit" class="btn btn-sm btn-primary">Update Players</button>
+        <button type="submit" class="btn btn-sm btn-primary">Create User Team</button>
     </form>
    
 {%endblock%}

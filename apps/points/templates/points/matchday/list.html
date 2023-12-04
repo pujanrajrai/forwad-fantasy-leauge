@@ -1,7 +1,18 @@
 {% extends "base.html" %}
-{% block body %}
-<a href="{% url 'points:matchday_create' %}" class="btn btn-sm btn-primary">
-    <i class="fa fa-plus"></i>Create MatchDay</a>
+{%block button %}
+<button id="myButton" type="submit" class="btn btn-primary btn-sm">
+  <i class="bx bx-plus-medical"></i>
+  Create MatchDay
+</button>
+
+<script type="text/javascript">
+  document.getElementById("myButton").onclick = function () {
+      location.href = "{% url 'points:matchday_create' %}";
+  };
+</script>
+
+    {%endblock%}
+    {% block body %}
               <table class="table datatable">
                 <thead>
                   <tr>
