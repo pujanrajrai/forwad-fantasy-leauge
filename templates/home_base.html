@@ -54,7 +54,7 @@
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
     <div class="d-flex align-items-center justify-content-between">
-      <a href="index.html" class="logo d-flex align-items-center">
+      <a href="{% url 'users:home' %}" class="logo d-flex align-items-center">
         <img src="{% static 'dashboard/img/logo.png' %}" alt="">
         <span class="d-none d-lg-block">FFL</span>
       </a>
@@ -85,7 +85,12 @@
                   </li>
                   <li class="nav-item dropdown">
                       <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-                         <button class="btn btn-sm"  style="background-color:#4153F1; color:white;">About Us</button>
+                         <button class="btn btn-sm" id="about"  style="background-color:#4153F1; color:white;">About Us</button>
+                         <script type="text/javascript">
+                          document.getElementById("about").onclick = function () {
+                            location.href = "{% url 'users:about' %}";
+                          };
+                      </script>
                       </a><!-- End Notification Icon -->
                      </li>
                      
