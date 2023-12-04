@@ -2,7 +2,7 @@
 #todo
 CRUD of user including password change and blocking user
 """
-from decorators import has_roles
+
 from django.shortcuts import redirect, render, get_object_or_404
 from .forms import ProfileForm, UserForm, UserPasswordChangeForm
 from django.contrib import messages
@@ -14,6 +14,7 @@ from django.contrib.auth import update_session_auth_hash
 from django.views.generic import ListView
 from django.urls import reverse
 
+from decorators import has_roles
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 
@@ -55,6 +56,8 @@ class UserListView(ListView):
 # views.py
 
 
+@method_decorator(login_required(), name='dispatch')
+@method_decorator(has_roles(['admin']), name='dispatch')
 class BlockUserView(View):
     def get(self, request, user_id):
         user = get_object_or_404(User, id=user_id)
@@ -66,6 +69,8 @@ class BlockUserView(View):
         return redirect('accounts:pages:users:user_list')
 
 
+@method_decorator(login_required(), name='dispatch')
+@method_decorator(has_roles(['admin']), name='dispatch')
 class UnblockUserView(View):
     def get(self, request, user_id):
         user = get_object_or_404(User, id=user_id)
@@ -77,6 +82,8 @@ class UnblockUserView(View):
         return redirect('accounts:pages:users:user_list')
 
 
+@method_decorator(login_required(), name='dispatch')
+@method_decorator(has_roles(['admin']), name='dispatch')
 class UserProfileRedirectView(View):
     # Change this to the actual template name for the user profile page
     template_name = 'accounts/usermanagement/user_profile.html'

@@ -7,7 +7,15 @@ from django.views.generic.edit import CreateView
 from .forms import MatchDayCreateForm,PlayerPointsCreateForm,TeamResultCreateForm
 from django.urls import reverse_lazy
 from django.views.generic.edit import UpdateView
-# Create your views here.
+from decorators import has_roles
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
+
+
+
+
+@method_decorator(login_required(), name='dispatch')
+@method_decorator(has_roles(['admin']), name='dispatch')
 class MatchDayListView(ListView):
     model = MatchDay
     template_name = 'points/matchday/list.html'
@@ -17,6 +25,9 @@ class MatchDayListView(ListView):
         # Customize the queryset if needed
         return MatchDay.objects.all()
 
+
+@method_decorator(login_required(), name='dispatch')
+@method_decorator(has_roles(['admin']), name='dispatch')
 class MatchDayCreateView(CreateView):
     model = MatchDay
     form_class = MatchDayCreateForm
@@ -27,6 +38,9 @@ class MatchDayCreateView(CreateView):
         # Optionally, you can perform additional actions when the form is valid
         return super().form_valid(form)
 
+
+@method_decorator(login_required(), name='dispatch')
+@method_decorator(has_roles(['admin']), name='dispatch')
 class MatchDayUpdateView(UpdateView):
     model = MatchDay
     form_class = MatchDayCreateForm  # Use the same form as in your CreateView
@@ -38,7 +52,8 @@ class MatchDayUpdateView(UpdateView):
         return super().form_valid(form)
 
 
-# Player Points
+@method_decorator(login_required(), name='dispatch')
+@method_decorator(has_roles(['admin']), name='dispatch')# Player Points
 class PlayerPointsListView(ListView):
     model = PlayerPoints
     template_name = 'points/playerpoint/list.html'
@@ -49,6 +64,9 @@ class PlayerPointsListView(ListView):
         return PlayerPoints.objects.all()
 
 
+
+@method_decorator(login_required(), name='dispatch')
+@method_decorator(has_roles(['admin']), name='dispatch')
 class PlayerPointsCreateView(CreateView):
     model = PlayerPoints
     form_class = PlayerPointsCreateForm
@@ -59,6 +77,10 @@ class PlayerPointsCreateView(CreateView):
         # Optionally, you can perform additional actions when the form is valid
         return super().form_valid(form)
 
+
+
+@method_decorator(login_required(), name='dispatch')
+@method_decorator(has_roles(['admin']), name='dispatch')
 class PlayerPointUpdateView(UpdateView):
     model = PlayerPoints
     form_class = PlayerPointsCreateForm  # Use the same form as in your CreateView
@@ -72,6 +94,9 @@ class PlayerPointUpdateView(UpdateView):
 
 
 # Team Result
+
+@method_decorator(login_required(), name='dispatch')
+@method_decorator(has_roles(['admin']), name='dispatch')
 class TeamResultListView(ListView):
     model = TeamResult
     template_name = 'points/teamresult/list.html'
@@ -82,6 +107,10 @@ class TeamResultListView(ListView):
         return TeamResult.objects.all()
 
 
+
+
+@method_decorator(login_required(), name='dispatch')
+@method_decorator(has_roles(['admin']), name='dispatch')
 class TeamResultCreateView(CreateView):
     model = TeamResult
     form_class = TeamResultCreateForm
@@ -92,6 +121,10 @@ class TeamResultCreateView(CreateView):
         # Optionally, you can perform additional actions when the form is valid
         return super().form_valid(form)
 
+
+
+@method_decorator(login_required(), name='dispatch')
+@method_decorator(has_roles(['admin']), name='dispatch')
 class TeamResultUpdateView(UpdateView):
     model = TeamResult
     form_class = TeamResultCreateForm  # Use the same form as in your CreateView

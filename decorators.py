@@ -21,7 +21,6 @@ def has_roles(allowed_roles):
             try:
                 user = request.user
                 if user.is_authenticated:
-                    username = request.user.username
                     if not user.is_blocked:
                         if user.role in allowed_roles:
                             return view_function(request, *args, **kwargs)
